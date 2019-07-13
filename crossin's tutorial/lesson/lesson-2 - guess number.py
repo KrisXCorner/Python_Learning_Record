@@ -8,10 +8,10 @@ while some == False:
     count += 1
     answer = int(input())
     if answer > num:
-        print('too big!')
+        print('%d is too big!'% answer)
     if answer < num:
-        print('too small')
+        print('%d is too small'% answer)
     if answer == num:
-        print('bingo')
+        print('bingo! %d is the right answer.'% answer)
         some = True
 print('你一共猜了',count,'次')

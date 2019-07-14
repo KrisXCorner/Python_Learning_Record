@@ -2,10 +2,10 @@ def isEqual(num1,num2):
     if num1<num2:
         print('too small')
         return False
-    if num1>num2:
+    elif num1>num2:
         print('too big')
         return False
-    if num1==num2:
+    else num1==num2:
         print('Bingo! You totally guessed',count+1,'times.')
         return True
 

@@ -5,7 +5,7 @@ def isEqual(num1,num2):
     elif num1>num2:
         print('too big')
         return False
-    else num1==num2:
+    else:
         print('Bingo! You totally guessed',count+1,'times.')
         return True
 

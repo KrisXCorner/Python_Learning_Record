@@ -1,24 +1,29 @@
-from random import randint
+from random import choice   #randint 只能随机选整数，choice 是选择一项
 
 score = 0
 
-direction = ['left','right','middle']
-print('choose a direction to shoot:left ? right ? middle ?')
-a = input()
-b = randint('left','right','middle')
+direction = ['left','center','right']
+print('choose one side to shoot:left ? center ? right ?')
+you = input()
+ai = choice(direction)
 
-if a == b:
+if you == ai:
     score -= 1
     print('Pity! Failed to score.')
 else:
     score += 1
     print('Congratulations! Nice shoot!')
 
-print('choose a direction to keep:left ? right ? middle ?')
+print()
+print("Now it's your turn to keep.")
+print('choose one side to keep:left ? center? right ?')
 
-if a == b:
+you = input()
+ai = choice(direction)
+
+if you == ai:
     score += 1
-    print('Congratulations! Nice shoot!')
+    print('Congratulations! Nice move!')
 else:
     score -= 1
-    print('Pity! Failed to score.')
+    print('Pity! Failed to keep.')

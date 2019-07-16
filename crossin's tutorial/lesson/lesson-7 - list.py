@@ -20,4 +20,8 @@ li = ['apple', 'pear', 'orange']
 fruit = s.join(li)  #join则是把一个list中的所有字符串连接成一个字符串
 print(fruit)
 
-'; ' = (['apple','pear','orange'])
+';'.join(['apple','pear','orange'])
+
+word = 'hello world'
+for c in word:
+    print(c)

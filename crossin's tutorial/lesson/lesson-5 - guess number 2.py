@@ -19,4 +19,8 @@ while bingo == False:
     num = int(input())
     bingo = isEqual(num,a)
     count += 1
+
+    if num < 0:
+        print('Exit game...')
+        break
     

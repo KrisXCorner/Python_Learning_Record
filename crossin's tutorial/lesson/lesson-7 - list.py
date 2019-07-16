@@ -22,6 +22,6 @@ print(fruit)
 
 ';'.join(['apple','pear','orange'])
 
-word = 'hello world'
+word = 'hello world'    #字符串的切分与数组类似，但是字符串不能直接赋值
 for c in word:
     print(c)

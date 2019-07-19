@@ -1,4 +1,3 @@
-A 0 0 0
-kris 0 0 0
-vera 0 0 0
-
+A 3 2 9
+kris 2 3 6
+vera 3 1 7

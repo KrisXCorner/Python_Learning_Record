@@ -11,6 +11,7 @@ for l in lines:
 score = scores.get(name)
 if score is None:    #如果没有找到该玩家的数据，说明他是一个新玩家，我们给他初始化一组成绩
     score = [0,0,0]
+    print("It's the first try for you.")
 
 game_times = int(score[0])
 min_times = int(score[1])
@@ -48,16 +49,16 @@ total_times += count
 if game_times == 0 or count < min_times:
     min_times = count
 
+game_times += 1
 if game_times > 0:
     avg_times = total_times / game_times
 else:
     avg_times = 0
-game_times += 1
 
-scores[name] = [str(game_times),str(min_times),str(total_times)]      #这里一定要加空格，不如一次输出后分数就连在一块了
+scores[name] = [str(game_times),str(min_times),str(total_times)]      
 result = ''
 for n in scores:
-    line = n + '' + ''.join(scores[n]) + '\n'
+    line = n + ' ' + ' '.join(scores[n]) + '\n'     #这里一定要加空格，不如一次输出后分数就连在一块了
     result += line
 
 print('%s,你一共玩了%d轮，最快%d次猜中，平均%.2f次猜中'%(name,game_times,min_times,avg_times))

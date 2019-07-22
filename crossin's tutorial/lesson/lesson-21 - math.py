@@ -42,3 +42,5 @@ math.degrees(x)
 # 弧度转角度
 math.radians(x)
 # 角度转弧度
+
+# 查看官方的完整文档 https://docs.python.org/3.7/library/math.html

@@ -17,6 +17,5 @@ print (Sum(4, 5, 6))
 def fn(x):
     return lambda y:x+y
 
-a = fn(2)
-print(a)
+a = fn(2)   # a = lambda y: 2 + y
 print(a(3))

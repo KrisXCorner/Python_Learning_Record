@@ -3,6 +3,9 @@ import math
 math.pi # 圆周率π：3.141592...
 math.e # 自然常数：2.718281...
 
+x = 1
+y = 1
+
 # 数值运算：
 
 math.ceil(x)

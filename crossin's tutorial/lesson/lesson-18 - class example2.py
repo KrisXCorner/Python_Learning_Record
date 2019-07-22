@@ -16,7 +16,8 @@ class Car(Vehicle):
         Vehicle.drive(self,distance)
         print('need %f fuels'%(distance * self.fuel)
 
-b = Bike(15)
+
+b = Bike(15.0)
 c = Car(80,0.012)
 b.drive(100)
 c.drive(100)

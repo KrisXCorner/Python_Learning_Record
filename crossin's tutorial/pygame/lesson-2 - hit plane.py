@@ -22,7 +22,7 @@ while True:             #游戏主循环
         bullet_x = x - bullet.get_width()/2
         bullet_y = y - bullet.get_height()/2        #把子弹的中心位置设为鼠标坐标
     else:
-        bullet_y -= 5            #子弹的位置往上移(模拟子弹发射出去轨迹)
+        bullet_y -= 6            #子弹的位置往上移(模拟子弹发射出去轨迹)
     screen.blit(bullet,(bullet_x,bullet_y))         #把子弹画到屏幕上
     
     x -= plane.get_width()/2

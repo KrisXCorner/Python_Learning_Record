@@ -41,11 +41,11 @@ class Plane:
         self.y = 800
     def __init__(self):
         self.restart()
-        self.image = pygame.image.load('./pygame/plane,png').convert_alpha()
+        self.image = pygame.image.load('./pygame/plane.png').convert_alpha()
     def move(self):
         x,y = pygame.mouse.get_pos()         #获取鼠标位置
-        x -= plane.get_width()/2
-        y -= plane.get_height()/2            #计算飞机的左上角位置
+        x -= self.image.get_width()/2
+        y -= self.image.get_height()/2            #计算飞机的左上角位置
         self.x = x
         self.y = y
 
@@ -80,7 +80,7 @@ def checkCrash(enemy,plane):
     return False
 
 gameover = False
-Myplane = Plane[]
+Myplane = Plane()
 score = 0
 font = pygame.font.Font(None,32)    #在pygame中要显示文字，不能直接print，无法显示在屏幕上。需要先创建一个font对象
 
@@ -110,8 +110,9 @@ while True:             #游戏主循环
     for b in bullets:
         if b.active == True:     #判断每个子弹的状态
            for e in enemies:
-               e.move()
                if checkHit(e,b):
+                   e.restart()
+                   b.active = False
                    score += 100
            b.move()           # 处理子弹运动
            screen.blit(b.image,(b.x,b.y))         #把子弹画到屏幕上
@@ -128,7 +129,7 @@ while True:             #游戏主循环
             if checkCrash(e,Myplane):
                 gameover = True
             Myplane.move()
-            screen.blit(Myplane,(x,y))             #把飞机画到屏幕上。图片加载顺序 由下到上 叠放
+            screen.blit(Myplane.image,(Myplane.x,Myplane.y))             #把飞机画到屏幕上。图片加载顺序 由下到上 叠放
     else:
         screen.blit(text,(640,420)) 
     

@@ -51,6 +51,19 @@ class Plane:
 
 # ---------------
 
+def checkHit(enemy,bullet):
+    if (bullet.x > enemy.x and bullet.x < enemy.x + enemy.image.get_width()) and (bullet.y > enemy.y and bullet.y < enemy.image.get_height()):
+        enemy.restart()
+        bullet.active = False
+        return True
+    return False        #增加返回值
+def checkCrash(enemy,plane):
+    # 给plane的长宽打上一点折扣
+    if (plane.x + 0.7*plane.image.get_width() > enemy.x and plane.x + 0.3*plane.image.get_width() < enemy.x + enemy.image.get_width()) and (plane.y + 0.7*plane.image.get_height() > enemy.y and plane.y + 0.3*plane.image.get_height() < enemy.y + enemy.image.get_height()):
+        return True
+    return False
+
+
 pygame.init()       # 初始化pygame,为使用硬件做准备
 screen = pygame.display.set_mode((1280,853),0,32)  # 创建了一个窗口,窗口大小和背景图片大小一样
 pygame.display.set_caption("Hello world!")      # 设置窗口标题
@@ -66,18 +79,6 @@ interval_b = 0              #初始子弹间隔
 enemies = []            #创建一个敌机的list
 for j in range(12):      #添加6个敌机到list里
     enemies.append(Enemy())
-
-def checkHit(enemy,bullet):
-    if (bullet.x > enemy.x and bullet.x < enemy.x + enemy.image.get_width()) and (bullet.y > enemy.y and bullet.y < enemy.image.get_height()):
-        enemy.restart()
-        bullet.active = False
-        return True
-    return False        #增加返回值
-def checkCrash(enemy,plane):
-    # 给plane的长宽打上一点折扣
-    if (plane.x + 0.7*plane.image.get_width() > enemy.x and plane.x + 0.3*plane.image.get_width() < enemy.x + enemy.image.get_width()) and (plane.y + 0.7*plane.image.get_height() > enemy.y and plane.y + 0.3*plane.image.get_height() < enemy.image.get_height()):
-        return True
-    return False
 
 gameover = False
 Myplane = Plane()
@@ -100,37 +101,36 @@ while True:             #游戏主循环
 
     screen.blit(background,(0,0))        #将背景图画上去
 
-    interval_b -= 1
-    if interval_b < 0:          #激活一发子弹
-        bullets[index_b].restart()   #第*发子弹被激活
-        interval_b = 30            #重置间隔时间
-        index_b = (index_b + 1)%count_b     #切换到下一个子弹，让子弹周期性的被激活（这个很有趣）
+    if not gameover == True:
+        interval_b -= 1
+        if interval_b < 0:          #激活一发子弹
+            bullets[index_b].restart()   #第*发子弹被激活
+            interval_b = 30            #重置间隔时间
+            index_b = (index_b + 1)%count_b     #切换到下一个子弹，让子弹周期性的被激活（这个很有趣）
 
-    # 只处理active的子弹，绘制它们
-    for b in bullets:
-        if b.active == True:     #判断每个子弹的状态
-           for e in enemies:
-               if checkHit(e,b):
-                   e.restart()
-                   b.active = False
-                   score += 100
-           b.move()           # 处理子弹运动
-           screen.blit(b.image,(b.x,b.y))         #把子弹画到屏幕上
-    
-    for e in enemies:
-        e.move()                # 处理敌机运动
-        screen.blit(e.image,(e.x,e.y))       #更新敌机位置
-    
-    text = font.render("Score:%d"%score,1,(0,0,0))
-    screen.blit(text,(0,0))     #(0,0)是屏幕左上角的位置
-
-    if not gameover:
+        # 只处理active的子弹，绘制它们
+        for b in bullets:
+            if b.active == True:     #判断每个子弹的状态
+                for e in enemies:
+                    if checkHit(e,b):
+                        score += 100
+                b.move()           # 处理子弹运动
+                screen.blit(b.image,(b.x,b.y))         #把子弹画到屏幕上
+        
         for e in enemies:
             if checkCrash(e,Myplane):
                 gameover = True
-            Myplane.move()
-            screen.blit(Myplane.image,(Myplane.x,Myplane.y))             #把飞机画到屏幕上。图片加载顺序 由下到上 叠放
+            e.move()                # 处理敌机运动
+            screen.blit(e.image,(e.x,e.y))       #更新敌机位置
+        
+        Myplane.move()
+        screen.blit(Myplane.image,(Myplane.x,Myplane.y))             #把飞机画到屏幕上。图片加载顺序 由下到上 叠放
+
+        text = font.render("Score:%d"%score,1,(0,0,0))
+        screen.blit(text,(0,0))     #(0,0)是屏幕左上角的位置
     else:
-        screen.blit(text,(640,420)) 
+        text = font.render("Score:%d"%score,1,(0,0,0))
+        screen.blit(text,(640,420))     #在屏幕中间显示
+        pass
     
     pygame.display.update()              #刷新一下画面

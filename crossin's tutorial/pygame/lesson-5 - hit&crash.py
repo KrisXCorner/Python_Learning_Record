@@ -130,7 +130,7 @@ while True:             #游戏主循环
         screen.blit(text,(0,0))     #(0,0)是屏幕左上角的位置
     else:
         text = font.render("Score:%d"%score,1,(0,0,0))
-        screen.blit(text,(640,420))     #在屏幕中间显示
+        screen.blit(text,(600,400))     #在屏幕中间显示
         pass
     
     pygame.display.update()              #刷新一下画面

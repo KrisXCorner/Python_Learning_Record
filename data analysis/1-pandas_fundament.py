@@ -48,9 +48,15 @@ df.query('兑换码' == ['A4','M4'])       #query函数查询
 ## 数据汇总
 
 df.groupby('兑换码').count()
+df.groupby('兑换码').sum()      #分组并求和
+df.groupby('兑换码').mean()     #分组并求平均
 df.sample(n=3)      # 随机取样 3个
 
 df.describe().round(2).T        #自动生成数据的数量，均值，标准差等数据; #round（2）,显示小数点后面2位数，T转置
 df['兑换码'].std()          #标准差std()
 df['客服当天回复消息数'].cov(df['客服提问数'])      #协方差cov
 df['客服当天回复消息数'].corr(df['客服提问数'])     #相关性分析corr ; 相关系数在-1到1之间，接近1为正相关，接近-1为负相关，0为不相关
+
+% matplotlib inline
+df.plot(kind = 'bar')       #条形图
+df.plot()               #默认为折线图
